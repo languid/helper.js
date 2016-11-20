@@ -2,10 +2,11 @@
   "name": "helper.js",
   "version": "1.0.0",
   "description": "Helper Functions",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "flow": "flow; test $? -eq 0 -o $? -eq 2"
+    "flow": "flow; test $? -eq 0 -o $? -eq 2",
+    "build": "rollup -g lodash:_,jquery:$ -f umd -n helper -o build/helper.js -- index.js && uglifyjs build/helper.js -c -m -o build/helper.min.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,10 @@
   "homepage": "https://github.com/languid/helper.js#readme",
   "dependencies": {
     "jquery": "^3.1.1",
-    "lodash": "^4.17.2",
-    "minivents": "^2.0.2"
+    "lodash": "^4.17.2"
+  },
+  "devDependencies": {
+    "rollup": "^0.36.3",
+    "uglifyjs": "^2.4.10"
   }
 }

@@ -5,7 +5,6 @@
 import $ from 'jquery';
 import lazyResize from './lazyResize';
 
-//@flow
 export default function({context=null, height=0}={}) {
     const $win = $(window);
     const _context = $(context);

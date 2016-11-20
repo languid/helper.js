@@ -3,7 +3,7 @@
  */
 
 import $ from 'jquery';
-import util from 'util';
+import {isArray} from 'lodash';
 import noop from '../noop';
 
 let pending = 0;
@@ -12,7 +12,7 @@ export default function(elements, callback=noop) {
 
     const $document = $(document);
 
-    let els = (!util.isArray(elements) ? [elements] : $.makeArray(elements)).map(function (element) {
+    let els = (!isArray(elements) ? [elements] : $.makeArray(elements)).map(function (element) {
         return element && element.jquery ? element[0] : element;
     });
 

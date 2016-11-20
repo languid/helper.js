@@ -5,7 +5,7 @@
 import $ from 'jquery';
 import delay from '../delay';
 import noop from '../noop';
-import util from 'util';
+import {isFunction} from 'lodash';
 
 export default function(options) {
     let timer = null, isEnd = false;
@@ -19,7 +19,7 @@ export default function(options) {
         delay: 50
     };
 
-    if(util.isFunction(options)){
+    if(isFunction(options)){
         setting.end = options;
     } else {
         setting = Object.assign(setting, options)

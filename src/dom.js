@@ -2,19 +2,17 @@
  * Created by Yinxiong on 2016/11/20.
  */
 
-import _ from 'lodash';
+import {isArray} from 'lodash';
 import $ from 'jquery';
-import {delay} from './helper';
-
-export const $win = $(window);
 
 export const clickOtherPlace = function () {
     let pending = 0;
-    let $document = $(document);
+
+    const $document = $(document);
 
     return (elements, callback) => {
 
-        let els = (!_.isArray(elements) ? [elements] : $.makeArray(elements)).map(function (element) {
+        let els = (!isArray(elements) ? [elements] : $.makeArray(elements)).map(function (element) {
             return element && element.jquery ? element[0] : element;
         });
 

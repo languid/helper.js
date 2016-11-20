@@ -1,0 +1,29 @@
+{
+  "name": "helper.js",
+  "version": "1.0.0",
+  "description": "Helper Functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "flow": "flow; test $? -eq 0 -o $? -eq 2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/languid/helper.js.git"
+  },
+  "keywords": [
+    "javascript",
+    "js"
+  ],
+  "author": "Yinxiong",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/languid/helper.js/issues"
+  },
+  "homepage": "https://github.com/languid/helper.js#readme",
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "lodash": "^4.17.2",
+    "minivents": "^2.0.2"
+  }
+}

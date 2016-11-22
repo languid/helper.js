@@ -1,10 +1,13 @@
 {
   "name": "helper.js",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Helper Functions",
   "main": "build/helper.js",
+  "module": "index",
   "scripts": {
-    "pretest": "rollup -c && uglifyjs build/helper.js -c -m -o build/helper.min.js"
+    "prepublish": "uglifyjs build/helper.js -c -m -o build/helper.min.js",
+    "build": "rollup -c",
+    "test": "eslint index.js src"
   },
   "repository": {
     "type": "git",
@@ -27,6 +30,11 @@
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.18.0",
     "babel-preset-es2015": "^6.18.0",
+    "eslint": "^3.10.2",
+    "eslint-config-google": "^0.7.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1",
     "rollup": "^0.36.3",
     "rollup-plugin-babel": "^2.6.1",
     "uglifyjs": "^2.4.10"

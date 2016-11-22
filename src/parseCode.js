@@ -8,7 +8,7 @@ export default function(content, defaultValue) {
         return defaultValue;
     }
     if (typeof content == 'string') {
-        return !!content ? (new Function('return ' + content))() : defaultValue;
+        return content ? (new Function('return ' + content))() : defaultValue;
     }
     return content;
 }

@@ -29,7 +29,8 @@ export default function(elements, callback=noop) {
     $document.bind(name, function (e) {
         const target = e.target;
         let r = 0;
-        for (let i = 0, el; i < len; i++) {
+        let el;
+        for (let i = 0; i < len; i++) {
             el = els[i];
             if (target != el && !$.contains(el, target)) {
                 r++;

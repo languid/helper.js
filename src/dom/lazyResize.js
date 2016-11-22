@@ -23,19 +23,19 @@ export default function(options) {
     if(isFunction(options)){
         setting.end = options;
     } else {
-        setting = Object.assign(setting, options)
+        setting = Object.assign(setting, options);
     }
 
     $win.on(setting.name, function (e) {
         clearTimeout(timer);
         if (!isEnd) {
             isEnd = true;
-            setting.start.call($win, e)
+            setting.start.call($win, e);
         }
         timer = delay(function () {
             isEnd = false;
             setting.end.call($win, e);
-        }, setting.delay)
+        }, setting.delay);
     });
 
     if (setting.init) {

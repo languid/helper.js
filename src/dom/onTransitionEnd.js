@@ -7,5 +7,5 @@ export default function(el, fn) {
     el.one(name, fn);
     return function () {
         el.unbind(name);
-    }
+    };
 }

@@ -3,7 +3,7 @@
  */
 import _ from 'lodash';
 
-export default {
+const validator = {
     required: {
         message(){
             return 'required';
@@ -11,7 +11,7 @@ export default {
         validate(val, required){
             return !required ? true :
                 _.isString(val) ? !!_.trim(val) :
-                    _.isArray(val) || _.isObject(val) ? _.size(val) > 0 : true
+                    _.isArray(val) || _.isObject(val) ? _.size(val) > 0 : true;
         }
     },
     maxlength: {
@@ -32,7 +32,7 @@ export default {
     },
     max: {
         message(){
-            return 'max'
+            return 'max';
         },
         validate(val, num){
             return validator.number(val, true) && +val <= num;
@@ -40,7 +40,7 @@ export default {
     },
     min: {
         message(){
-            return 'min'
+            return 'min';
         },
         validate(val, num){
             return validator.number(val, true) && +val >= num;
@@ -48,15 +48,15 @@ export default {
     },
     number: {
         message(){
-            return 'must number'
+            return 'must number';
         },
         validate(val, required){
-            return !required ? true :/^\d+(\.\d+)?$/.test(val)
+            return !required ? true :/^\d+(\.\d+)?$/.test(val);
         }
     },
     digits: {
         message(){
-            return 'must digits'
+            return 'must digits';
         },
         validate(val, required){
             return !required ? true : /^\d+$/.test(val);
@@ -71,3 +71,5 @@ export default {
         }
     }
 };
+
+export default validator;

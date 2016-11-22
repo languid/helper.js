@@ -14,7 +14,7 @@ export default function(url, isNewWindow){
     if (!isNewWindow) {
         local.href = href;
     } else {
-        window.open(href)
+        window.open(href);
     }
     return local;
 }

@@ -8,6 +8,12 @@ import noop from '../noop';
 
 let pending = 0;
 
+/**
+ *
+ * @param elements
+ * @param callback
+ * @returns {Function}
+ */
 export default function(elements, callback=noop) {
 
     const $document = $(document);

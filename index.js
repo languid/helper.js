@@ -11,7 +11,7 @@ export {default as parseCode} from './src/parseCode';
 export {default as validator} from './src/validator';
 
 // dom
-export {default as clickOtherPlace} from './src/dom/clickOtherPlace';
+export {default as clickOtherPlace} from './src/dom/documentClick';
 export {default as lazyLoad} from './src/dom/lazyLoad';
 export {default as onAnimateEnd} from './src/dom/onAnimateEnd';
 export {default as onTransitionEnd} from './src/dom/onTransitionEnd';

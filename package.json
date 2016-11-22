@@ -1,8 +1,8 @@
 {
   "name": "helper.js",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Helper Functions",
-  "main": "build/index.js",
+  "main": "build/helper.js",
   "scripts": {
     "pretest": "rollup -c && uglifyjs build/helper.js -c -m -o build/helper.min.js"
   },

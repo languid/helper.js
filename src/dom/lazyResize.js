@@ -8,7 +8,8 @@ import noop from '../noop';
 import {isFunction} from 'lodash';
 
 export default function(options) {
-    let timer = null, isEnd = false;
+    let timer = null;
+    let isEnd = false;
     let $win = $(window);
 
     let setting = {
@@ -27,7 +28,7 @@ export default function(options) {
 
     $win.on(setting.name, function (e) {
         clearTimeout(timer);
-        if (isEnd == false) {
+        if (!isEnd) {
             isEnd = true;
             setting.start.call($win, e)
         }

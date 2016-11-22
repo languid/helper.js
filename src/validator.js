@@ -63,7 +63,7 @@ export default {
         }
     },
     range: {
-        message(condition, value){
+        message(condition){
             return `Must be between ${condition[0]} and ${condition[1]}`;
         },
         validate(val, range){

@@ -14,3 +14,5 @@ export {default as lazyLoad} from './src/lazyLoad';
 export {default as onAnimateEnd} from './src/onAnimateEnd';
 export {default as onTransitionEnd} from './src/onTransitionEnd';
 export {default as lazyResize} from './src/lazyResize';
+import * as dateHelper from './src/date';
+export {dateHelper};

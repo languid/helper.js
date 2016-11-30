@@ -9,10 +9,11 @@ export default {
     dest: 'build/helper.js',
     moduleName: 'helper',
     format: 'umd',
-    external: ['lodash', 'jquery'],
+    external: ['lodash', 'jquery', 'moment'],
     globals: {
         lodash: '_',
-        jquery: '$'
+        jquery: '$',
+        moment: 'moment'
     },
     plugins: [
         babel({

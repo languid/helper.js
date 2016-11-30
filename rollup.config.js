@@ -9,14 +9,14 @@ export default {
     dest: 'build/helper.js',
     moduleName: 'helper',
     format: 'umd',
-	external: ['lodash', 'jquery'],
-	globals: {
-    	lodash: '_',
-		jquery: '$'
-	},
-	plugins: [
-		babel({
-			exclude: 'node_modules/**'
-		})
-	]
-}
+    external: ['lodash', 'jquery'],
+    globals: {
+        lodash: '_',
+        jquery: '$'
+    },
+    plugins: [
+        babel({
+            exclude: 'node_modules/**'
+        })
+    ]
+};

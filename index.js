@@ -9,10 +9,8 @@ export {default as go} from './src/go';
 export {default as paramsEncode} from './src/paramsEncode';
 export {default as parseCode} from './src/parseCode';
 export {default as validator} from './src/validator';
-
-// dom
-export {default as clickOtherPlace} from './src/dom/documentClick';
-export {default as lazyLoad} from './src/dom/lazyLoad';
-export {default as onAnimateEnd} from './src/dom/onAnimateEnd';
-export {default as onTransitionEnd} from './src/dom/onTransitionEnd';
-export {default as lazyResize} from './src/dom/lazyResize';
+export {default as documentClick} from './src/documentClick';
+export {default as lazyLoad} from './src/lazyLoad';
+export {default as onAnimateEnd} from './src/onAnimateEnd';
+export {default as onTransitionEnd} from './src/onTransitionEnd';
+export {default as lazyResize} from './src/lazyResize';

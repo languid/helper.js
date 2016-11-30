@@ -4,7 +4,7 @@
 
 import $ from 'jquery';
 import {isArray} from 'lodash';
-import noop from '../noop';
+import noop from './noop';
 
 let pending = 0;
 

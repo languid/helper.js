@@ -1,12 +1,13 @@
 {
   "name": "helper.js",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "description": "Helper Functions",
   "main": "build/helper.js",
+  "jsnext:main": "index",
   "module": "index",
   "scripts": {
     "prepublish": "uglifyjs build/helper.js -c -m -o build/helper.min.js",
-    "build": "rollup -c",
+    "build": "npm run test && rollup -c",
     "test": "eslint index.js src"
   },
   "repository": {

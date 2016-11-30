@@ -3,8 +3,8 @@
  */
 
 import $ from 'jquery';
-import delay from '../delay';
-import noop from '../noop';
+import delay from './delay';
+import noop from './noop';
 import {isFunction} from 'lodash';
 
 export default function(options) {

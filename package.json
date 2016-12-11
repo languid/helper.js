@@ -1,10 +1,8 @@
 {
   "name": "helper.js",
-  "version": "1.1.0",
+  "version": "1.2.3",
   "description": "Helper Functions",
   "main": "build/helper.js",
-  "jsnext:main": "index",
-  "module": "index",
   "scripts": {
     "prepublish": "uglifyjs build/helper.js -c -m -o build/helper.min.js",
     "build": "npm run test && rollup -c",
@@ -19,7 +17,7 @@
     "js"
   ],
   "author": "Yinxiong",
-  "license": "MIT",
+  "license": "",
   "bugs": {
     "url": "https://github.com/languid/helper.js/issues"
   },

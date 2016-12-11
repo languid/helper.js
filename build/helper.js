@@ -1,11 +1,12 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('lodash'), require('jquery')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'lodash', 'jquery'], factory) :
-  (factory((global.helper = global.helper || {}),global._,global.$));
-}(this, (function (exports,_,$) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('lodash'), require('jquery'), require('moment')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'lodash', 'jquery', 'moment'], factory) :
+  (factory((global.helper = global.helper || {}),global._,global.$,global.moment));
+}(this, (function (exports,_,$,moment) { 'use strict';
 
 var ___default = 'default' in _ ? _['default'] : _;
 $ = 'default' in $ ? $['default'] : $;
+moment = 'default' in moment ? moment['default'] : moment;
 
 /**
  * Created by Yinxiong on 2016/11/20.
@@ -303,6 +304,160 @@ var onTransitionEnd = function (el, fn) {
 };
 
 /**
+ * Created by Yinxiong on 2016/12/11.
+ */
+
+var loadImage = function (url, callback, crossDomain) {
+    var img = new Image();
+    img.src = url;
+    if (crossDomain) {
+        img.setAttribute('crossOrigin', 'anonymous');
+    }
+    if (img.complete) {
+        callback.call(img, false);
+    } else {
+        img.onload = function () {
+            callback.call(img, false);
+        };
+        img.onerror = function () {
+            callback.call(this, true);
+        };
+        img.src = img.src;
+    }
+};
+
+/**
+ * Created by Yinxiong on 2016/5/10 0010.
+ */
+
+var DATE_FORMAT = {
+    LOCAL_FORMAT: 'LL',
+    YMD_FORMAT: 'YYYY-MM-DD'
+};
+
+/**
+ * 快捷方法，添加format方法
+ * @param arr
+ * @returns {*}
+ */
+function toRangeArray(arr) {
+    arr.format = function () {
+        return [this[0].format(DATE_FORMAT.YMD_FORMAT), this[1].format(DATE_FORMAT.YMD_FORMAT)];
+    };
+    return arr;
+}
+
+function thisDay() {
+    return toRangeArray([moment(), moment()]);
+}
+
+function thisWeek() {
+    var today = moment();
+    var endWeek = moment().endOf('week');
+    return toRangeArray([moment().startOf('week'), endWeek.isAfter(today) ? today : endWeek]);
+}
+
+function thisMonth() {
+    var today = moment();
+    var endMonth = moment().endOf('month');
+    return toRangeArray([moment().startOf('month'), endMonth.isAfter(today) ? today : endMonth]);
+}
+
+function thisYear() {
+    var today = moment();
+    var endYear = moment().endOf('year');
+    return toRangeArray([moment().startOf('year'), endYear.isAfter(today) ? today : endYear]);
+}
+
+function yesterday() {
+    var m = moment().subtract(1, 'days');
+    return toRangeArray([m, m]);
+}
+
+/**
+ * 前几天
+ * @param count
+ * @returns {*}
+ */
+function lastDay() {
+    var count = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+    return toRangeArray([moment().subtract(count, 'days'), moment().subtract(1, 'days')]);
+}
+
+/**
+ * 前几周
+ * @param count
+ * @returns {*}
+ */
+function lastWeek() {
+    var count = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+    return toRangeArray([moment().subtract(count, 'week').startOf('week'), moment().subtract(1, 'week').endOf('week')]);
+}
+
+/**
+ * 前几个月
+ * @param count
+ * @returns {*}
+ */
+function lastMonth() {
+    var count = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+    return toRangeArray([moment().subtract(count, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]);
+}
+
+/**
+ * 前几年
+ * @param count
+ * @returns {*}
+ */
+function lastYear() {
+    var count = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+    return toRangeArray([moment().subtract(count, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')]);
+}
+
+/**
+ * 近几周
+ * @param count
+ * @returns {array}
+ */
+function nearlyWeek() {
+    var count = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+    return toRangeArray([moment().subtract(count, 'week'), moment().subtract(1, 'days')]);
+}
+
+/**
+ * 近几个月
+ * @param count
+ * @returns {array}
+ */
+function nearlyMonth() {
+    var count = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+    return toRangeArray([moment().subtract(count, 'month'), moment().subtract(1, 'days')]);
+}
+
+/**
+ * 近几年
+ * @param count
+ * @returns {*}
+ */
+function nearlyYear() {
+    var count = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+    return toRangeArray([moment().subtract(count, 'year'), moment().subtract(1, 'days')]);
+}
+
+function formatDate(date) {
+    var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DATE_FORMAT.YMD_FORMAT;
+
+    return moment(date).format(format);
+}
+
+/**
  * Created by Yinxiong on 2016/11/20.
  */
 
@@ -318,6 +473,22 @@ exports.lazyLoad = lazyLoad;
 exports.onAnimateEnd = onAnimateEnd;
 exports.onTransitionEnd = onTransitionEnd;
 exports.lazyResize = lazyResize;
+exports.loadImage = loadImage;
+exports.DATE_FORMAT = DATE_FORMAT;
+exports.toRangeArray = toRangeArray;
+exports.thisDay = thisDay;
+exports.thisWeek = thisWeek;
+exports.thisMonth = thisMonth;
+exports.thisYear = thisYear;
+exports.yesterday = yesterday;
+exports.lastDay = lastDay;
+exports.lastWeek = lastWeek;
+exports.lastMonth = lastMonth;
+exports.lastYear = lastYear;
+exports.nearlyWeek = nearlyWeek;
+exports.nearlyMonth = nearlyMonth;
+exports.nearlyYear = nearlyYear;
+exports.formatDate = formatDate;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

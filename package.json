@@ -1,6 +1,6 @@
 {
   "name": "helper.js",
-  "version": "1.2.3",
+  "version": "1.3.3",
   "description": "Helper Functions",
   "main": "build/helper.js",
   "scripts": {
@@ -8,6 +8,13 @@
     "build": "npm run test && rollup -c",
     "test": "eslint index.js src"
   },
+  "files": [
+    "build",
+    "src",
+    "index.js"
+  ],
+  "module": "index",
+  "jsnext:main": "index",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/languid/helper.js.git"

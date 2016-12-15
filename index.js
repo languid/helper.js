@@ -15,4 +15,5 @@ export {default as onAnimateEnd} from './src/onAnimateEnd';
 export {default as onTransitionEnd} from './src/onTransitionEnd';
 export {default as lazyResize} from './src/lazyResize';
 export {default as loadImage} from './src/loadImage';
+export {default as clearEmpty} from './src/clearEmpty';
 export * from './src/date';

@@ -327,6 +327,20 @@ var loadImage = function (url, callback, crossDomain) {
 };
 
 /**
+ * Created by Yinxiong on 2016/12/15.
+ */
+
+var clearEmpty = function (obj) {
+    var query = {};
+    ___default.forEach(obj, function (value, key) {
+        if (value || parseInt(value) == 0) {
+            query[key] = value;
+        }
+    });
+    return query;
+};
+
+/**
  * Created by Yinxiong on 2016/5/10 0010.
  */
 
@@ -474,6 +488,7 @@ exports.onAnimateEnd = onAnimateEnd;
 exports.onTransitionEnd = onTransitionEnd;
 exports.lazyResize = lazyResize;
 exports.loadImage = loadImage;
+exports.clearEmpty = clearEmpty;
 exports.DATE_FORMAT = DATE_FORMAT;
 exports.toRangeArray = toRangeArray;
 exports.thisDay = thisDay;

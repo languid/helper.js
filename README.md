@@ -1,6 +1,16 @@
 # helper.js
 
-wait()
+## wait(obj, resolved=true, duration)
+test function
 
-queuer()
-
+```js
+async function fetch(){
+  try{
+    let data = await wait({
+      code: 0
+    });
+  }catch(e){
+    console.error(e)  
+  }
+}
+```

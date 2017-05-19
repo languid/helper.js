@@ -341,6 +341,60 @@ var clearEmpty = function (obj) {
 };
 
 /**
+ * Created by Yinxiong on 2017/5/19.
+ */
+
+var wait = function () {
+    var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var resolved = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+    var d = arguments[2];
+
+    return new Promise(function (resolve, reject) {
+        setTimeout(function () {
+            resolved ? resolve(props) : reject(props);
+        }, d || Math.random() * 5000);
+    });
+};
+
+/**
+ * Created by Yinxiong on 2017/5/19.
+ */
+
+var queuer = function () {
+    var queue = [];
+    queue.isReady = false;
+    queue.exec = function (fn) {
+        if (queue.isReady) {
+            fn();
+        } else {
+            queue.push(fn);
+        }
+    };
+    queue.ready = function () {
+        queue.isReady = true;
+        queue.forEach(function (f) {
+            return f();
+        });
+    };
+
+    return queue;
+};
+
+/**
+ * Created by Yinxiong on 2017/5/19.
+ */
+
+function uppercase(v) {
+    if (!v) return '';
+    return v.toString().toUpperCase();
+}
+
+function lowercase(v) {
+    if (!v) return '';
+    return v.toString().toLowerCase();
+}
+
+/**
  * Created by Yinxiong on 2016/5/10 0010.
  */
 
@@ -489,6 +543,10 @@ exports.onTransitionEnd = onTransitionEnd;
 exports.lazyResize = lazyResize;
 exports.loadImage = loadImage;
 exports.clearEmpty = clearEmpty;
+exports.wait = wait;
+exports.queuer = queuer;
+exports.uppercase = uppercase;
+exports.lowercase = lowercase;
 exports.DATE_FORMAT = DATE_FORMAT;
 exports.toRangeArray = toRangeArray;
 exports.thisDay = thisDay;

@@ -16,4 +16,8 @@ export {default as onTransitionEnd} from './src/onTransitionEnd';
 export {default as lazyResize} from './src/lazyResize';
 export {default as loadImage} from './src/loadImage';
 export {default as clearEmpty} from './src/clearEmpty';
+export {default as wait} from './src/wait';
+export {default as queuer} from './src/queuer';
+
+export * from './src/string';
 export * from './src/date';

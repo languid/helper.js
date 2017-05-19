@@ -23,8 +23,8 @@ async function fetch(){
 }
 ```
 
-## queuer
-queue manager
+## queuer()
+simple queue manager
 ```js
   let queue = queuer();
   

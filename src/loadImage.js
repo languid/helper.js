@@ -3,21 +3,20 @@
  */
 
 export default function (url, callback, crossDomain) {
-    let img = new Image();
-    img.src = url;
-    if (crossDomain) {
-        img.setAttribute('crossOrigin', 'anonymous');
+  let img = new Image()
+  img.src = url
+  if (crossDomain) {
+    img.setAttribute('crossOrigin', 'anonymous')
+  }
+  if (img.complete) {
+    callback.call(img, false)
+  } else {
+    img.onload = function () {
+      callback.call(img, false)
     }
-    if (img.complete) {
-        callback.call(img, false);
+    img.onerror = function () {
+      callback.call(this, true)
     }
-    else {
-        img.onload = function () {
-            callback.call(img, false);
-        };
-        img.onerror = function () {
-            callback.call(this, true);
-        };
-        img.src = img.src;
-    }
+    img.src = img.src
+  }
 }

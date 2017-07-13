@@ -4,7 +4,7 @@
 
 // https://bost.ocks.org/mike/shuffle/
 // @flow
-export function shuffle (array: Array) {
+export default function (array) {
   let m = array.length
   let t
   let i

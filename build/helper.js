@@ -408,6 +408,31 @@ var queuer = function () {
 };
 
 /**
+ * Created by Yinxiong on 2017/7/13.
+ */
+
+// https://bost.ocks.org/mike/shuffle/
+// @flow
+var shuffle = function (array) {
+  var m = array.length;
+  var t = void 0;
+  var i = void 0;
+
+  // While there remain elements to shuffle…
+  while (m) {
+    // Pick a remaining element…
+    i = Math.floor(Math.random() * m--);
+
+    // And swap it with the current element.
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  }
+
+  return array;
+};
+
+/**
  * Created by Yinxiong on 2017/5/19.
  */
 
@@ -574,6 +599,7 @@ exports.loadImage = loadImage;
 exports.clearEmpty = clearEmpty;
 exports.wait = wait;
 exports.queuer = queuer;
+exports.shuffle = shuffle;
 exports.uppercase = uppercase;
 exports.lowercase = lowercase;
 exports.DATE_FORMAT = DATE_FORMAT;

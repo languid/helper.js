@@ -343,14 +343,23 @@ var clearEmpty = function (obj) {
  * Created by Yinxiong on 2017/5/19.
  */
 
-var wait = function () {
-  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var resolved = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-  var d = arguments[2];
+var wait = function (fn) {
+  var d = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var resolved = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
   return new Promise(function (resolve, reject) {
-    delay(function () {
-      resolved ? resolve(props) : reject(props);
+    var time = void 0;
+    time = delay(function () {
+      clearTimeout(time);
+      if (typeof fn === 'function') {
+        try {
+          resolve(fn());
+        } catch (e) {
+          reject(e);
+        }
+      } else {
+        resolved ? resolve(fn) : reject();
+      }
     }, d || Math.random() * 5000);
   });
 };
@@ -360,51 +369,51 @@ var wait = function () {
  */
 
 /**
- *
- * @param {Number} count
- * @param {Object} events
- * @returns {{ready: (function()), exec: (function(*=)), reset: (function())}}
+ * 简单的队列等待管理，主要为异步模块提供统一调用接口
+ * @param count
+ * @param props
+ * @returns {{list: Array, count: number, originCount: number, isReady: boolean, ready: (function()), exec: (function(*=)), reset: (function()), countdown: Function, complete: Function}}
  */
 var queuer = function () {
   var count = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-  var events = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-  var list = [];
-  var isReady = false;
-  var originCount = count;
-
-  events = Object.assign({
-    countdown: noop,
-    complete: noop
-  }, events);
-
-  return {
+  return Object.assign({
+    list: [],
+    count: count,
+    originCount: count,
+    isReady: false,
     ready: function ready() {
-      if (--count === 0) {
-        isReady = true;
-        list.forEach(function (f) {
-          return f();
+      var _this = this;
+
+      if (--this.count === 0) {
+        this.isReady = true;
+        this.list.forEach(function (f) {
+          return f.call(_this);
         });
-        events.complete();
+        this.complete();
       } else {
-        events.countdown(count);
+        this.countdown(this.count);
       }
     },
     exec: function exec(fn) {
       if (typeof fn === 'function') {
-        if (isReady) {
-          fn();
+        if (this.isReady) {
+          fn.call(this);
         } else {
-          list.push(fn);
+          this.list.push(fn);
         }
       }
     },
     reset: function reset() {
-      list = [];
-      count = originCount;
-      isReady = false;
-    }
-  };
+      this.list = [];
+      this.count = this.originCount;
+      this.isReady = false;
+    },
+
+    countdown: noop,
+    complete: noop
+  }, props);
 };
 
 /**

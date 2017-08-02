@@ -5,44 +5,41 @@
 import noop from './noop'
 
 /**
- *
- * @param {Number} count
- * @param {Object} events
- * @returns {{ready: (function()), exec: (function(*=)), reset: (function())}}
+ * 简单的队列等待管理，主要为异步模块提供统一调用接口
+ * @param count
+ * @param props
+ * @returns {{list: Array, count: number, originCount: number, isReady: boolean, ready: (function()), exec: (function(*=)), reset: (function()), countdown: Function, complete: Function}}
  */
-export default function (count = 1, events = {}) {
-  let list = []
-  let isReady = false
-  const originCount = count
-
-  events = Object.assign({
-    countdown: noop,
-    complete: noop
-  }, events)
-
-  return {
+export default function (count = 1, props = {}) {
+  return Object.assign({
+    list: [],
+    count,
+    originCount: count,
+    isReady: false,
     ready () {
-      if (--count === 0) {
-        isReady = true
-        list.forEach(f => f())
-        events.complete()
+      if (--this.count === 0) {
+        this.isReady = true
+        this.list.forEach(f => f.call(this))
+        this.complete()
       } else {
-        events.countdown(count)
+        this.countdown(this.count)
       }
     },
     exec (fn) {
       if (typeof fn === 'function') {
-        if (isReady) {
-          fn()
+        if (this.isReady) {
+          fn.call(this)
         } else {
-          list.push(fn)
+          this.list.push(fn)
         }
       }
     },
     reset () {
-      list = []
-      count = originCount
-      isReady = false
-    }
-  }
+      this.list = []
+      this.count = this.originCount
+      this.isReady = false
+    },
+    countdown: noop,
+    complete: noop
+  }, props)
 }

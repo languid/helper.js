@@ -378,42 +378,42 @@ var queuer = function () {
   var count = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
   var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-  return Object.assign({
+  var queue = Object.assign({
     list: [],
     count: count,
     originCount: count,
     isReady: false,
     ready: function ready() {
-      var _this = this;
-
-      if (--this.count === 0) {
-        this.isReady = true;
-        this.list.forEach(function (f) {
-          return f.call(_this);
+      if (--queue.count === 0) {
+        queue.isReady = true;
+        queue.list.forEach(function (f) {
+          return f.call(queue);
         });
-        this.complete();
+        queue.complete();
       } else {
-        this.countdown(this.count);
+        queue.countdown(queue.count);
       }
     },
     exec: function exec(fn) {
       if (typeof fn === 'function') {
-        if (this.isReady) {
-          fn.call(this);
+        if (queue.isReady) {
+          fn.call(queue);
         } else {
-          this.list.push(fn);
+          queue.list.push(fn);
         }
       }
     },
     reset: function reset() {
-      this.list = [];
-      this.count = this.originCount;
-      this.isReady = false;
+      queue.list = [];
+      queue.count = queue.originCount;
+      queue.isReady = false;
     },
 
     countdown: noop,
     complete: noop
   }, props);
+
+  return queue;
 };
 
 /**

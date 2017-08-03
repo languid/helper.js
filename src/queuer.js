@@ -11,35 +11,37 @@ import noop from './noop'
  * @returns {{list: Array, count: number, originCount: number, isReady: boolean, ready: (function()), exec: (function(*=)), reset: (function()), countdown: Function, complete: Function}}
  */
 export default function (count = 1, props = {}) {
-  return Object.assign({
+  const queue = Object.assign({
     list: [],
     count,
     originCount: count,
     isReady: false,
     ready () {
-      if (--this.count === 0) {
-        this.isReady = true
-        this.list.forEach(f => f.call(this))
-        this.complete()
+      if (--queue.count === 0) {
+        queue.isReady = true
+        queue.list.forEach(f => f.call(queue))
+        queue.complete()
       } else {
-        this.countdown(this.count)
+        queue.countdown(queue.count)
       }
     },
     exec (fn) {
       if (typeof fn === 'function') {
-        if (this.isReady) {
-          fn.call(this)
+        if (queue.isReady) {
+          fn.call(queue)
         } else {
-          this.list.push(fn)
+          queue.list.push(fn)
         }
       }
     },
     reset () {
-      this.list = []
-      this.count = this.originCount
-      this.isReady = false
+      queue.list = []
+      queue.count = queue.originCount
+      queue.isReady = false
     },
     countdown: noop,
     complete: noop
   }, props)
+
+  return queue
 }
